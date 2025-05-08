@@ -115,10 +115,10 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
                       key={muscleGroup.value}
                       type="button"
                       variant="outline"
-                      className={`px-3 py-2 h-auto text-sm font-medium glass-input backdrop-blur-md border-opacity-30 transition-all
+                      className={`px-3 py-2 h-auto text-sm font-medium glass-input backdrop-blur-md transition-all
                       ${selectedMuscleGroups.includes(muscleGroup.value) 
-                        ? "bg-primary/40 text-primary-foreground border-primary/80 hover:bg-primary/100 shadow-[0_0_15px_rgba(0,0,0,0.1)] ring-1 ring-primary/50" 
-                        : "hover:bg-muted/30 text-foreground hover:border-primary/30"
+                        ? "bg-primary/40 text-primary-foreground border-primary border-opacity-80 hover:bg-primary/50 shadow-lg ring-1 ring-primary/50" 
+                        : "border-opacity-30 hover:bg-primary/10 text-foreground hover:border-primary hover:border-opacity-50"
                       }`}
                       onClick={() => toggleMuscleGroup(muscleGroup.value)}
                     >
