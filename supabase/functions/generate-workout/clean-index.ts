@@ -41,7 +41,7 @@ function sanitizeHtml(html: string): string {
   sanitized = sanitized.replace(/\sid="[^"]*"/g, '');
   
   // Remove all other HTML tags except allowed ones
-  const tagPattern = new RegExp(`<(?!\/?(?:${allowedTags.join('|')})(\\s|>))[^>]*>`, 'gi');
+  const tagPattern = new RegExp(`<(?!\/?(?:${allowedTags.join('|')})(\s|>))[^>]*>`, 'gi');
   sanitized = sanitized.replace(tagPattern, '');
   
   // Clean up any remaining attributes from allowed tags
@@ -149,18 +149,6 @@ serve(async (req) => {
         'Content-Type': 'application/json',
         ...corsHeaders
       }
-    });
-  }
-});
-  } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 400,
-      headers: { 
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://nbd-design.github.io',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type'
-      },
     });
   }
 });

@@ -30,7 +30,7 @@ export default function Home() {
     <div className="container mx-auto px-4 py-8 max-w-5xl relative z-10">
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-3 neon-text tracking-tight">
-          Fitness<span className="neon-text-accent">Pal AI</span>
+          Fit<span className="neon-text-accent">Gen AI</span>
         </h1>
         <p className="text-lg text-neutral-300">Generate personalized workout plans with advanced AI</p>
       </header>
