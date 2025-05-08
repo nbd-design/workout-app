@@ -52,8 +52,15 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
 
   const generateMutation = useMutation({
     mutationFn: async (data: z.infer<typeof workoutFormSchema>) => {
-      const response = await apiRequest("POST", "/api/workouts/generate", data);
-      return response.json();
+      if (import.meta.env.PROD) {
+        // In production (GitHub Pages), use mock API
+        const { generateWorkout } = await import('@/lib/mockApi');
+        return generateWorkout(data);
+      } else {
+        // In development, use real API
+        const response = await apiRequest("POST", "/api/workouts/generate", data);
+        return response.json();
+      }
     },
     onSuccess: (data) => {
       onWorkoutGenerated(data);
