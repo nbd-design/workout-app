@@ -50,24 +50,28 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
     },
   });
 
-  const generateMutation = useMutation({
+  // Updated generateMutation using object syntax with mutationFn key
+  const generateMutation = useMutation<any, Error, z.infer<typeof workoutFormSchema>>({
     mutationFn: async (data: z.infer<typeof workoutFormSchema>) => {
       const { generateWorkout } = await import('@/lib/workoutService');
       return generateWorkout(data);
     },
     onSuccess: (data) => {
+      console.log("Workout generated successfully:", data);
       onWorkoutGenerated(data);
     },
-    onError: (error) => {
+    onError: (error: any) => {
+      console.error("Error generating workout:", error);
       toast({
-        title: "Error generating workout",
-        description: error.message || "Please try again later",
         variant: "destructive",
+        title: "Workout generation error",
+        description: "Failed to generate workout. Please try again later.",
       });
-    },
+    }
   });
 
   function onSubmit(data: z.infer<typeof workoutFormSchema>) {
+    console.log("Submitting workout data:", data);
     generateMutation.mutate(data);
   }
 
