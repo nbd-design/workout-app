@@ -59,7 +59,7 @@ export default function Home() {
       </div>
 
       <footer className="mt-12 text-center text-neutral-400 text-sm">
-        <p>FitnessPal AI uses advanced LLM technology to generate workout recommendations.</p>
+        <p>FitGen AI uses advanced LLM technology to generate workout recommendations.</p>
         <p className="mt-1">This tool is not a replacement for professional fitness advice.</p>
       </footer>
       

@@ -17,11 +17,11 @@ export async function generateWorkoutWithGemini(userPrompt: string): Promise<{ c
       history: [
         {
           role: "user",
-          parts: [{ text: "You are FitnessPal AI. " + SYSTEM_PROMPT }],
+          parts: [{ text: "You are FitGen AI. " + SYSTEM_PROMPT }],
         },
         {
           role: "model",
-          parts: [{ text: "I understand my role as FitnessPal AI. I'll generate custom workout plans based on the parameters you provide, focusing solely on fitness advice with clear HTML formatting." }],
+          parts: [{ text: "I understand my role as FitGen AI. I'll generate custom workout plans based on the parameters you provide, focusing solely on fitness advice with clear HTML formatting." }],
         },
       ],
       generationConfig: {
