@@ -189,6 +189,22 @@
   .workout-content * {
     font-family: inherit !important;
     background: transparent !important;
+    color: inherit !important;
+    border-color: rgba(81, 97, 235, 0.2) !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    line-height: 1.6 !important;
+    font-size: inherit !important;
+  }
+  
+  /* Remove all inline styles */
+  .workout-content [style] {
+    /* Override any inline styles with an empty attribute */
+    all: revert !important;
+    /* Then re-apply our base styles */
+    font-family: inherit !important;
+    background: transparent !important;
+    color: inherit !important;
   }
   
   /* Preserve specific styling for workout content */
