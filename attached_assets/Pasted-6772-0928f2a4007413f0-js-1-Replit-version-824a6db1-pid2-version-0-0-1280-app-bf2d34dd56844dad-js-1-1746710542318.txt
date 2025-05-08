@@ -1,0 +1,142 @@
+6772-0928f2a4007413f0.js:1 Replit version 824a6db1, pid2 version 0.0.1280
+_app-bf2d34dd56844dad.js:13 
+      /////////////////////
+   ///////////////////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////        Curious and driven?
+  ///////////////@@@@@@@///////        Work with us!
+  ///////////////@@@@@@@///////
+  ///////////////@@@@@@@///////        https://join.replit.com/hack.with.us
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@#//////////////
+   ///////////////////////////
+      /////////////////////
+      
+/agentVerify?prompt=LIQw1gpgBAttJQO4QEYGcCWAXaAzA9gE5QAO%20AJgMYhpZQA2GtEAdhIWlFgBYh3cR6JTiQCuhSrzTReLcjBDloJQhVGUsnRNm5RKo2vhgYAXnwz4WUfCSwWWaAHRQAqtKgpRGelgC0GKwBlAFEAeShcCD5xCE4sfCg%20LEIQDVgiaAA3JmwiNCA&skipOnboarding=true:1 Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.
+_app-bf2d34dd56844dad.js:13 [LaunchDarkly] LaunchDarkly client initialized
+stallwart.build.js:1 stallwart: failed ping 1
+stallwart.build.js:1 stallwart: failed ping 2
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'ambient-light-sensor'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'battery'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'execution-while-not-rendered'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'execution-while-out-of-viewport'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'layout-animations'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'legacy-image-formats'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'navigation-override'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'oversized-images'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'publickey-credentials'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'speaker-selection'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'unoptimized-images'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'unsized-media'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Unrecognized feature: 'pointer-lock'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Allow attribute will take precedence over 'allowfullscreen'.
+_ @ framework-a3856ca841ddd9ba.js:1
+framework-a3856ca841ddd9ba.js:1 Allow attribute will take precedence over 'allowpaymentrequest'.
+_ @ framework-a3856ca841ddd9ba.js:1
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+FitnessAI:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+workspace_iframe.html:32 Unrecognized feature: 'ambient-light-sensor'.
+workspace_iframe.html:32 Unrecognized feature: 'battery'.
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-not-rendered'.
+workspace_iframe.html:32 Unrecognized feature: 'execution-while-out-of-viewport'.
+workspace_iframe.html:32 Unrecognized feature: 'layout-animations'.
+workspace_iframe.html:32 Unrecognized feature: 'legacy-image-formats'.
+workspace_iframe.html:32 Unrecognized feature: 'navigation-override'.
+workspace_iframe.html:32 Unrecognized feature: 'oversized-images'.
+workspace_iframe.html:32 Unrecognized feature: 'publickey-credentials'.
+workspace_iframe.html:32 Unrecognized feature: 'speaker-selection'.
+workspace_iframe.html:32 Unrecognized feature: 'unoptimized-images'.
+workspace_iframe.html:32 Unrecognized feature: 'unsized-media'.
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowfullscreen'.
+workspace_iframe.html:32 Allow attribute will take precedence over 'allowpaymentrequest'.
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/api/workouts/generate:1 
+            
+            
+           Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/api/workouts/generate:1 
+            
+            
+           Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/api/workouts/generate:1 
+            
+            
+           Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)
+3c05e41a-7500-40c6-bfb4-8e1ed0f6c77b-00-37ivnr0ymkuin.worf.replit.dev/:1 
+            
+            
+           Failed to load resource: the server responded with a status of 502 (Bad Gateway)
+
+                
+          
+          
+          
+         Chrome is moving towards a new experience that allows users to choose to browse without third-party cookies.

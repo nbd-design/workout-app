@@ -101,10 +101,13 @@ export function WorkoutResult({ workout, onReset, isLoading }: WorkoutResultProp
       {workout?.isDemo && (
         <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-md text-amber-800 text-sm">
           <p className="flex items-center">
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            This workout was generated using our demonstration AI model. Some features may be limited.
+            <span>
+              This workout was generated using our built-in library of exercises. While the AI service is unavailable, 
+              we've created a personalized workout based on your selected parameters.
+            </span>
           </p>
         </div>
       )}
