@@ -14,6 +14,7 @@ interface WorkoutResultProps {
       duration: string;
     };
     content: string;
+    isDemo?: boolean;
   } | null;
   onReset: () => void;
   isLoading: boolean;
@@ -85,7 +86,7 @@ export function WorkoutResult({ workout, onReset, isLoading }: WorkoutResultProp
   // Result state
   return (
     <div className="bg-white rounded-xl shadow-md p-6 overflow-y-auto max-h-[800px]">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold text-neutral-800">Your Workout Plan</h2>
         <Button 
           variant="ghost" 
@@ -96,6 +97,17 @@ export function WorkoutResult({ workout, onReset, isLoading }: WorkoutResultProp
           New Workout
         </Button>
       </div>
+      
+      {workout?.isDemo && (
+        <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-md text-amber-800 text-sm">
+          <p className="flex items-center">
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            This workout was generated using our demonstration AI model. Some features may be limited.
+          </p>
+        </div>
+      )}
       
       <div className="mb-6 p-4 bg-neutral-100 rounded-lg">
         <div className="grid grid-cols-2 gap-3 text-sm">

@@ -6,6 +6,7 @@ import { ZodError } from "zod";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { generateWorkoutWithOpenAI } from "./openai";
+import { generateWorkoutWithGemini } from "./gemini";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API endpoint to generate workouts
@@ -20,19 +21,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Format the prompt with the parameters
       const userPrompt = formatUserPrompt(validatedData);
 
-      // Generate workout using OpenAI
-      const workoutContent = await generateWorkoutWithOpenAI(userPrompt);
+      // Generate workout using Gemini (primary) or fallback to mock
+      const geminiResult = await generateWorkoutWithGemini(userPrompt);
       
-      // Format the response if needed
-      const formattedContent = formatWorkoutResponse(workoutContent);
+      let content: string;
+      
+      if (geminiResult.isDemo) {
+        // If the API call failed, use mock data
+        console.log("Using mock workout data due to API error");
+        content = mockWorkoutResponse(validatedData);
+      } else {
+        // Format the response if needed
+        content = formatWorkoutResponse(geminiResult.content);
+      }
       
       // Save the generated workout content
-      await storage.updateWorkoutContent(savedWorkout.id, formattedContent);
+      await storage.updateWorkoutContent(savedWorkout.id, content);
 
-      // Return the workout data
+      // Return the workout data 
       res.json({
         parameters: validatedData,
-        content: formattedContent,
+        content,
+        isDemo: geminiResult.isDemo
       });
     } catch (error) {
       if (error instanceof ZodError) {
