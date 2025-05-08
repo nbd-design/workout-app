@@ -71,4 +71,4 @@ Parameters that will be provided:
 If asked anything that isn't specifically about generating a workout based on these parameters, respond: "I can only generate workout plans based on your specified parameters. Please provide muscle groups, intensity, workout type, goal, and duration for a personalized workout plan."
 `;
 
-export const LLM_MODEL = "gpt-4o"; // OpenAI model instead of local Ollama
+export const LLM_MODEL = "gemini-2.0-flash"; // Google's Gemini AI model with free tier access

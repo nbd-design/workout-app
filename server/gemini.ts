@@ -4,8 +4,8 @@ import { SYSTEM_PROMPT } from "../client/src/lib/constants";
 // Initialize the Google Generative AI client
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
-// Using the Gemini Pro model which supports text generation
-const MODEL_NAME = "gemini-1.5-pro";
+// Using Gemini 2.0 Flash model which has higher free tier limits
+const MODEL_NAME = "gemini-2.0-flash";
 
 export async function generateWorkoutWithGemini(userPrompt: string): Promise<{ content: string; isDemo: boolean }> {
   try {
