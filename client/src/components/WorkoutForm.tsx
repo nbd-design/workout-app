@@ -71,25 +71,12 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
     generateMutation.mutate(data);
   }
 
-  const toggleMuscleGroup = (muscleGroup: string) => {
-    const isFullBody = muscleGroup === "fullbody";
-    let updatedGroups: string[];
-
-    if (isFullBody) {
-      // If fullbody is selected, remove all other selections
-      updatedGroups = selectedMuscleGroups.includes(muscleGroup) ? [] : [muscleGroup];
-    } else {
-      // If other group is selected, remove fullbody if present
-      if (selectedMuscleGroups.includes(muscleGroup)) {
-        updatedGroups = selectedMuscleGroups.filter(group => group !== muscleGroup);
-      } else {
-        updatedGroups = selectedMuscleGroups.filter(group => group !== "fullbody");
-        updatedGroups.push(muscleGroup);
-      }
-    }
-
-    setSelectedMuscleGroups(updatedGroups);
-    form.setValue("muscleGroups", updatedGroups, { shouldValidate: true });
+  const toggleMuscleGroup = (group: string) => {
+    const newSelection = selectedMuscleGroups.includes(group)
+      ? selectedMuscleGroups.filter(g => g !== group)
+      : [...selectedMuscleGroups, group];
+    setSelectedMuscleGroups(newSelection);
+    form.setValue("muscleGroups", newSelection);
   };
 
   return (
