@@ -116,31 +116,61 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
           <FormField
             control={form.control}
             name="muscleGroups"
-            render={() => (
-              <FormItem>
+            render={({ field }) => (
+              <FormItem className="space-y-3">
                 <FormLabel className="text-neutral-200 font-medium">
                   Muscle Groups <span className="text-red-400">*</span>
                 </FormLabel>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  {MUSCLE_GROUPS.map((muscleGroup) => (
-                    <Button
-                      key={muscleGroup.value}
-                      type="button"
-                      variant="outline"
-                      className={`px-3 py-2 h-auto text-sm font-medium glass-input backdrop-blur-md transition-all
-                      ${selectedMuscleGroups.includes(muscleGroup.value) 
-                        ? "bg-primary/40 text-primary-foreground border-primary border-opacity-80 hover:bg-primary/50 shadow-lg ring-1 ring-primary/50" 
-                        : "border-opacity-30 hover:bg-primary/10 text-foreground hover:border-primary hover:border-opacity-50"
-                      }`}
-                      onClick={() => toggleMuscleGroup(muscleGroup.value)}
-                    >
-                      {muscleGroup.label}
-                    </Button>
-                  ))}
+                
+                <div className="muscle-group-selector">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                    {MUSCLE_GROUPS.map((muscleGroup) => {
+                      const isSelected = selectedMuscleGroups.includes(muscleGroup.value);
+                      return (
+                        <div
+                          key={muscleGroup.value}
+                          onClick={() => toggleMuscleGroup(muscleGroup.value)}
+                          className={`
+                            relative flex items-center justify-center p-3 rounded-md cursor-pointer
+                            transition-all duration-200 ease-in-out
+                            ${isSelected 
+                              ? 'bg-primary/30 text-white border-2 border-primary shadow-lg' 
+                              : 'glass-input hover:bg-primary/10 hover:border-primary/50 border-2 border-transparent'}
+                          `}
+                          aria-selected={isSelected}
+                          role="option"
+                        >
+                          {/* Selection indicator */}
+                          {isSelected && (
+                            <div className="absolute top-1 right-1 h-3 w-3 bg-primary rounded-full" />
+                          )}
+                          
+                          <span className="font-medium text-sm">{muscleGroup.label}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-                <FormDescription className="text-xs text-neutral-400">
-                  Select one or more muscle groups to focus on
-                </FormDescription>
+                
+                <div className="flex items-center justify-between mt-2">
+                  <FormDescription className="text-xs text-neutral-400">
+                    Select one or more muscle groups to focus on
+                  </FormDescription>
+                  
+                  {selectedMuscleGroups.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedMuscleGroups([]);
+                        form.setValue("muscleGroups", []);
+                      }}
+                      className="text-xs text-primary hover:text-primary/80 transition-colors"
+                    >
+                      Clear selection
+                    </button>
+                  )}
+                </div>
+                
                 <FormMessage />
               </FormItem>
             )}
