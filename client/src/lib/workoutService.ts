@@ -31,18 +31,43 @@ function createMockWorkout(data: WorkoutFormData): WorkoutResponse {
     }
   ];
   
-  // Create a properly structured WorkoutResponse object
-  const workoutTitle = `${data.goal} ${data.workoutType} Workout`;
-  const workoutNotes = `This ${data.workoutType.toLowerCase()} workout focuses on ${data.muscleGroups.join(', ')} with ${data.intensity}/5 intensity. (Development mode: Using mock data)`;
+  // Generate clean HTML content for the workout
+  const exercisesHtml = mockExercises.map(ex => `
+    <div class="exercise-card">
+      <h3>${ex.name}</h3>
+      <ul>
+        <li><strong>Sets:</strong> ${ex.sets}</li>
+        <li><strong>Reps:</strong> ${ex.reps}</li>
+        <li><strong>Rest:</strong> ${ex.rest}</li>
+      </ul>
+    </div>
+  `).join('');
   
+  const workoutTitle = `${data.goal} ${data.workoutType} Workout`;
+  const workoutDescription = `This ${data.workoutType.toLowerCase()} workout focuses on ${data.muscleGroups.join(', ')} with ${data.intensity}/5 intensity.`;
+  
+  // Create clean HTML content without any problematic styling
+  const htmlContent = `
+    <div>
+      <h2>${workoutTitle}</h2>
+      <p>${workoutDescription}</p>
+      <p><em>(Development mode: Using mock data)</em></p>
+      <div class="exercises-container">
+        ${exercisesHtml}
+      </div>
+    </div>
+  `;
+  
+  // Return a properly structured WorkoutResponse object
   return {
     workout: {
       title: workoutTitle,
       exercises: mockExercises,
       intensity: data.intensity,
-      notes: workoutNotes
-    }
-  };
+      notes: workoutDescription + ' (Development mode: Using mock data)'
+    },
+    content: htmlContent
+  } as WorkoutResponse;
 }
 
 export async function generateWorkout(data: WorkoutFormData): Promise<WorkoutResponse> {

@@ -131,10 +131,12 @@ export function WorkoutResult({ workout, onReset, isLoading }: WorkoutResultProp
         </div>
       </div>
       
-      <div 
-        className="prose prose-invert max-w-none text-neutral-200"
-        dangerouslySetInnerHTML={{ __html: workout?.content || '' }}
-      />
+      <div className="workout-content-wrapper">
+        <div 
+          className="prose prose-invert max-w-none text-neutral-200 workout-content"
+          dangerouslySetInnerHTML={{ __html: workout?.content || '' }}
+        />
+      </div>
       
       <div className="mt-6 pt-6 border-t border-slate-700/50">
         <Button 
