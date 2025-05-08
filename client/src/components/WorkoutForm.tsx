@@ -53,19 +53,40 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
   // Updated generateMutation using object syntax with mutationFn key
   const generateMutation = useMutation<any, Error, z.infer<typeof workoutFormSchema>>({
     mutationFn: async (data: z.infer<typeof workoutFormSchema>) => {
-      const { generateWorkout } = await import('@/lib/workoutService');
-      return generateWorkout(data);
+      try {
+        console.log("Calling generateWorkout with data:", data);
+        const { generateWorkout } = await import('@/lib/workoutService');
+        const result = await generateWorkout(data);
+        console.log("Raw API response:", result);
+        return result;
+      } catch (err: unknown) {
+        // Log detailed error information
+        const error = err as Error;
+        console.error("Detailed error in mutation function:", {
+          message: error.message,
+          stack: error.stack,
+          name: error.name,
+          cause: error.cause,
+          fullError: error
+        });
+        throw err; // Re-throw to be caught by onError
+      }
     },
     onSuccess: (data) => {
       console.log("Workout generated successfully:", data);
       onWorkoutGenerated(data);
     },
     onError: (error: any) => {
-      console.error("Error generating workout:", error);
+      console.error("Error generating workout:", {
+        message: error?.message,
+        name: error?.name,
+        stack: error?.stack,
+        fullError: error
+      });
       toast({
         variant: "destructive",
         title: "Workout generation error",
-        description: "Failed to generate workout. Please try again later.",
+        description: error?.message || "Failed to generate workout. Please try again later.",
       });
     }
   });
