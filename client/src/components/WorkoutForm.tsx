@@ -93,8 +93,11 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6">
-      <h2 className="text-xl font-bold text-neutral-800 mb-6">Customize Your Workout</h2>
+    <div>
+      <div className="mb-6">
+        <h2 className="text-xl font-bold neon-text mb-2">Customize Your Workout</h2>
+        <div className="h-1 w-16 bg-gradient-to-r from-primary to-accent rounded-full"></div>
+      </div>
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -103,8 +106,8 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
             name="muscleGroups"
             render={() => (
               <FormItem>
-                <FormLabel className="text-neutral-700 font-medium">
-                  Muscle Groups <span className="text-red-500">*</span>
+                <FormLabel className="text-neutral-200 font-medium">
+                  Muscle Groups <span className="text-red-400">*</span>
                 </FormLabel>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                   {MUSCLE_GROUPS.map((muscleGroup) => (
@@ -112,10 +115,10 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
                       key={muscleGroup.value}
                       type="button"
                       variant="outline"
-                      className={`px-3 py-2 h-auto text-sm font-medium hover:bg-neutral-100 ${
-                        selectedMuscleGroups.includes(muscleGroup.value)
-                          ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                          : ""
+                      className={`px-3 py-2 h-auto text-sm font-medium glass-input backdrop-blur-md border-opacity-30 
+                      ${selectedMuscleGroups.includes(muscleGroup.value)
+                        ? "bg-primary/30 text-primary-foreground border-primary hover:bg-primary/40 glow"
+                        : "hover:bg-muted/30 text-foreground"
                       }`}
                       onClick={() => toggleMuscleGroup(muscleGroup.value)}
                     >
@@ -123,7 +126,7 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
                     </Button>
                   ))}
                 </div>
-                <FormDescription className="text-xs text-neutral-500">
+                <FormDescription className="text-xs text-neutral-400">
                   Select one or more muscle groups to focus on
                 </FormDescription>
                 <FormMessage />
@@ -136,16 +139,16 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
             name="intensity"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <div className="flex justify-between">
-                  <FormLabel className="text-neutral-700 font-medium">
-                    Intensity Level <span className="text-red-500">*</span>
+                <div className="flex justify-between items-center">
+                  <FormLabel className="text-neutral-200 font-medium">
+                    Intensity Level <span className="text-red-400">*</span>
                   </FormLabel>
-                  <span className="text-sm font-normal text-neutral-500">
+                  <span className="text-sm font-normal text-primary neon-text">
                     {INTENSITY_LABELS[field.value]}
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-xs text-neutral-600">Beginner</span>
+                  <span className="text-xs text-neutral-400">Beginner</span>
                   <FormControl>
                     <Slider
                       min={1}
@@ -156,7 +159,7 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
                       className="w-full"
                     />
                   </FormControl>
-                  <span className="text-xs text-neutral-600">Expert</span>
+                  <span className="text-xs text-neutral-400">Expert</span>
                 </div>
                 <FormMessage />
               </FormItem>
@@ -168,19 +171,19 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
             name="workoutType"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel className="text-neutral-700 font-medium">
-                  Workout Type <span className="text-red-500">*</span>
+                <FormLabel className="text-neutral-200 font-medium">
+                  Workout Type <span className="text-red-400">*</span>
                 </FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger className="w-full p-3 h-auto">
+                    <SelectTrigger className="w-full p-3 h-auto glass-input backdrop-blur-md border-opacity-30">
                       <SelectValue placeholder="Select workout type" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent className="glass-card border-opacity-30">
                     {WORKOUT_TYPES.map((type) => (
                       <SelectItem key={type.value} value={type.value}>
                         {type.label}
@@ -198,19 +201,19 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
             name="goal"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel className="text-neutral-700 font-medium">
-                  Fitness Goal <span className="text-red-500">*</span>
+                <FormLabel className="text-neutral-200 font-medium">
+                  Fitness Goal <span className="text-red-400">*</span>
                 </FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger className="w-full p-3 h-auto">
+                    <SelectTrigger className="w-full p-3 h-auto glass-input backdrop-blur-md border-opacity-30">
                       <SelectValue placeholder="Select your goal" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent className="glass-card border-opacity-30">
                     {GOALS.map((goal) => (
                       <SelectItem key={goal.value} value={goal.value}>
                         {goal.label}
@@ -228,19 +231,19 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
             name="duration"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel className="text-neutral-700 font-medium">
-                  Duration <span className="text-red-500">*</span>
+                <FormLabel className="text-neutral-200 font-medium">
+                  Duration <span className="text-red-400">*</span>
                 </FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger className="w-full p-3 h-auto">
+                    <SelectTrigger className="w-full p-3 h-auto glass-input backdrop-blur-md border-opacity-30">
                       <SelectValue placeholder="Select duration" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent className="glass-card border-opacity-30">
                     {DURATIONS.map((duration) => (
                       <SelectItem key={duration.value} value={duration.value}>
                         {duration.label}
@@ -256,7 +259,7 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
           <div className="pt-2">
             <Button 
               type="submit" 
-              className="w-full h-auto py-3 px-6 font-medium"
+              className="w-full h-auto py-3 px-6 font-medium bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
               disabled={generateMutation.isPending}
             >
               {generateMutation.isPending ? (

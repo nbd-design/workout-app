@@ -56,12 +56,12 @@ export function WorkoutResult({ workout, onReset, isLoading }: WorkoutResultProp
   // Empty state
   if (!workout && !isLoading) {
     return (
-      <div className="bg-white rounded-xl shadow-md p-6 h-full flex flex-col items-center justify-center text-center">
-        <div className="p-4 rounded-full bg-neutral-100 inline-block mb-4">
-          <Dumbbell className="h-10 w-10 text-neutral-400" />
+      <div className="h-full flex flex-col items-center justify-center text-center">
+        <div className="p-4 rounded-full glass inline-block mb-6 glow">
+          <Dumbbell className="h-12 w-12 text-primary" />
         </div>
-        <h3 className="text-xl font-medium text-neutral-700 mb-2">Ready to get started?</h3>
-        <p className="text-neutral-500 max-w-md">
+        <h3 className="text-xl font-medium neon-text mb-3">Ready to get started?</h3>
+        <p className="text-neutral-300 max-w-md">
           Select your workout parameters and click "Generate Workout" to create a personalized fitness plan.
         </p>
       </div>
@@ -71,12 +71,15 @@ export function WorkoutResult({ workout, onReset, isLoading }: WorkoutResultProp
   // Loading state
   if (isLoading) {
     return (
-      <div className="bg-white rounded-xl shadow-md p-6 h-full flex flex-col items-center justify-center text-center">
-        <div className="p-4 rounded-full bg-primary-light/20 inline-block mb-4">
-          <RefreshCw className="h-10 w-10 text-primary animate-spin" />
+      <div className="h-full flex flex-col items-center justify-center text-center">
+        <div className="relative">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent opacity-30 blur-lg"></div>
+          <div className="p-4 rounded-full glass inline-block mb-6 relative">
+            <RefreshCw className="h-12 w-12 text-primary animate-spin" />
+          </div>
         </div>
-        <h3 className="text-xl font-medium text-neutral-700 mb-2">Creating your workout...</h3>
-        <p className="text-neutral-500 max-w-md">
+        <h3 className="text-xl font-medium neon-text mb-3">Creating your workout...</h3>
+        <p className="text-neutral-300 max-w-md">
           Our AI is designing a personalized workout plan based on your parameters.
         </p>
       </div>
@@ -85,12 +88,15 @@ export function WorkoutResult({ workout, onReset, isLoading }: WorkoutResultProp
 
   // Result state
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 overflow-y-auto max-h-[800px]">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-neutral-800">Your Workout Plan</h2>
+    <div className="overflow-y-auto max-h-[800px] pr-2">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-xl font-bold neon-text mb-2">Your Workout Plan</h2>
+          <div className="h-1 w-16 bg-gradient-to-r from-secondary to-accent rounded-full"></div>
+        </div>
         <Button 
-          variant="ghost" 
-          className="text-primary hover:text-primary-dark font-medium"
+          variant="outline" 
+          className="glass-input text-primary hover:text-secondary border-opacity-30"
           onClick={onReset}
         >
           <RefreshCw className="mr-1 h-4 w-4" />
@@ -99,7 +105,7 @@ export function WorkoutResult({ workout, onReset, isLoading }: WorkoutResultProp
       </div>
       
       {workout?.isDemo && (
-        <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-md text-amber-800 text-sm">
+        <div className="mb-6 p-4 glass-card border border-amber-500/30 text-amber-200 text-sm">
           <p className="flex items-center">
             <svg className="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -112,12 +118,12 @@ export function WorkoutResult({ workout, onReset, isLoading }: WorkoutResultProp
         </div>
       )}
       
-      <div className="mb-6 p-4 bg-neutral-100 rounded-lg">
+      <div className="mb-6 glass-card p-4 border border-blue-500/20">
         <div className="grid grid-cols-2 gap-3 text-sm">
           {workout && Object.entries(workout.parameters).map(([key, value]) => (
-            <div key={key}>
-              <p className="text-neutral-500">{capitalizeWords(key)}:</p>
-              <p className="font-medium text-neutral-800">
+            <div key={key} className="mb-2">
+              <p className="text-neutral-400">{capitalizeWords(key)}:</p>
+              <p className="font-medium text-white">
                 {formatParameterValue(key, value)}
               </p>
             </div>
@@ -126,13 +132,13 @@ export function WorkoutResult({ workout, onReset, isLoading }: WorkoutResultProp
       </div>
       
       <div 
-        className="prose max-w-none text-neutral-800"
+        className="prose prose-invert max-w-none text-neutral-200"
         dangerouslySetInnerHTML={{ __html: workout?.content || '' }}
       />
       
-      <div className="mt-6 pt-6 border-t border-neutral-200">
+      <div className="mt-6 pt-6 border-t border-slate-700/50">
         <Button 
-          className="w-full bg-blue-500 hover:bg-blue-600 h-auto py-3 px-6"
+          className="w-full h-auto py-3 px-6 bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity glow"
           onClick={downloadWorkout}
           disabled={downloadingPdf}
         >

@@ -3,49 +3,132 @@
 @tailwind utilities;
 
 :root {
-      --background: 0 0% 100%;
---foreground: 20 14.3% 4.1%;
---muted: 60 4.8% 95.9%;
---muted-foreground: 25 5.3% 44.7%;
---popover: 0 0% 100%;
---popover-foreground: 20 14.3% 4.1%;
---card: 0 0% 100%;
---card-foreground: 20 14.3% 4.1%;
---border: 20 5.9% 90%;
---input: 20 5.9% 90%;
---primary: 207 90% 54%;
---primary-foreground: 211 100% 99%;
---secondary: 60 4.8% 95.9%;
---secondary-foreground: 24 9.8% 10%;
---accent: 60 4.8% 95.9%;
---accent-foreground: 24 9.8% 10%;
---destructive: 0 84.2% 60.2%;
---destructive-foreground: 60 9.1% 97.8%;
---ring: 20 14.3% 4.1%;
---radius: 0.5rem;
+  --radius: 0.5rem;
+
+  /* Light mode - not used but kept for reference */
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 207 90% 54%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 60 4.8% 95.9%;
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 60 4.8% 95.9%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+}
+
+/* Dark mode variables - this is our main theme */
+.dark, :root {
+  --background: 226 30% 6%;
+  --foreground: 210 20% 98%;
+  
+  --card: 224 25% 9%;
+  --card-foreground: 210 20% 98%;
+  
+  --popover: 224 25% 9%;
+  --popover-foreground: 210 20% 98%;
+  
+  --primary: 217 91% 60%;
+  --primary-foreground: 210 20% 98%;
+  
+  --secondary: 196 80% 60%;
+  --secondary-foreground: 210 20% 98%;
+  
+  --accent: 263 70% 60%;
+  --accent-foreground: 210 20% 98%;
+  
+  --muted: 223 20% 20%;
+  --muted-foreground: 215 16% 75%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 20% 98%;
+  
+  --border: 223 20% 20%;
+  --input: 223 20% 20%;
+  --ring: 212.7 26.8% 83.9%;
+  
+  --glass-bg: rgba(17, 19, 33, 0.65);
+  --glass-border: rgba(81, 97, 235, 0.2);
+}
+
+/* Glassmorphism styles */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-input {
+  background: rgba(17, 19, 33, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(81, 97, 235, 0.2);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Animated gradient background */
+.gradient-bg {
+  background: linear-gradient(
+    -45deg,
+    hsl(var(--primary)),
+    hsl(var(--secondary)),
+    hsl(var(--accent)),
+    hsl(var(--destructive))
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
   }
-  .dark {
-      --background: 240 10% 3.9%;
---foreground: 0 0% 98%;
---muted: 240 3.7% 15.9%;
---muted-foreground: 240 5% 64.9%;
---popover: 240 10% 3.9%;
---popover-foreground: 0 0% 98%;
---card: 240 10% 3.9%;
---card-foreground: 0 0% 98%;
---border: 240 3.7% 15.9%;
---input: 240 3.7% 15.9%;
---primary: 207 90% 54%;
---primary-foreground: 211 100% 99%;
---secondary: 240 3.7% 15.9%;
---secondary-foreground: 0 0% 98%;
---accent: 240 3.7% 15.9%;
---accent-foreground: 0 0% 98%;
---destructive: 0 62.8% 30.6%;
---destructive-foreground: 0 0% 98%;
---ring: 240 4.9% 83.9%;
---radius: 0.5rem;
+  50% {
+    background-position: 100% 50%;
   }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--card));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--accent));
+}
 
 @layer base {
   * {
@@ -54,5 +137,33 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    background-image: 
+      radial-gradient(at 80% 0%, hsla(216, 90%, 54%, 0.15) 0px, transparent 50%), 
+      radial-gradient(at 0% 70%, hsla(263, 90%, 70%, 0.15) 0px, transparent 50%);
+    min-height: 100vh;
+  }
+  
+  /* Neon text effect */
+  .neon-text {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 5px hsla(var(--primary), 0.5),
+                 0 0 10px hsla(var(--primary), 0.3);
+  }
+  
+  .neon-text-accent {
+    color: hsl(var(--accent));
+    text-shadow: 0 0 5px hsla(var(--accent), 0.5),
+                 0 0 10px hsla(var(--accent), 0.3);
+  }
+  
+  /* Glow effects */
+  .glow {
+    box-shadow: 0 0 10px hsla(var(--primary), 0.5),
+                0 0 20px hsla(var(--primary), 0.3);
+  }
+  
+  .glow-accent {
+    box-shadow: 0 0 10px hsla(var(--accent), 0.5),
+                0 0 20px hsla(var(--accent), 0.3);
   }
 }
