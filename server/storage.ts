@@ -3,7 +3,7 @@ import {
   workoutHistory, type WorkoutHistory, type InsertWorkoutHistory 
 } from "@shared/schema";
 import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { eq, desc, sql } from "drizzle-orm";
 
 export interface IStorage {
   createWorkoutRequest(request: InsertWorkoutRequest): Promise<WorkoutRequest>;
@@ -53,7 +53,7 @@ export class DatabaseStorage implements IStorage {
     return await db
       .select()
       .from(workoutHistory)
-      .orderBy({ timestamp: 'desc' });
+      .orderBy(sql`${workoutHistory.timestamp} DESC`);
   }
 }
 

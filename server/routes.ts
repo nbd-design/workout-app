@@ -5,7 +5,7 @@ import { workoutFormSchema } from "../shared/schema";
 import { ZodError } from "zod";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
-import { SYSTEM_PROMPT, LLM_MODEL } from "../client/src/lib/constants";
+import { generateWorkoutWithOpenAI } from "./openai";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API endpoint to generate workouts
@@ -17,16 +17,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Save workout request in storage
       const savedWorkout = await storage.createWorkoutRequest(validatedData);
 
-      // Generate workout using LLM API (Ollama)
-      const workoutContent = await generateWorkoutWithLLM(validatedData);
+      // Format the prompt with the parameters
+      const userPrompt = formatUserPrompt(validatedData);
+
+      // Generate workout using OpenAI
+      const workoutContent = await generateWorkoutWithOpenAI(userPrompt);
+      
+      // Format the response if needed
+      const formattedContent = formatWorkoutResponse(workoutContent);
       
       // Save the generated workout content
-      await storage.updateWorkoutContent(savedWorkout.id, workoutContent);
+      await storage.updateWorkoutContent(savedWorkout.id, formattedContent);
 
       // Return the workout data
       res.json({
         parameters: validatedData,
-        content: workoutContent,
+        content: formattedContent,
       });
     } catch (error) {
       if (error instanceof ZodError) {
@@ -54,57 +60,57 @@ export async function registerRoutes(app: Express): Promise<Server> {
   return httpServer;
 }
 
-async function generateWorkoutWithLLM(params: z.infer<typeof workoutFormSchema>): Promise<string> {
-  try {
-    // Format the prompt with the parameters
-    const userPrompt = `
+function formatUserPrompt(params: z.infer<typeof workoutFormSchema>): string {
+  // Format intensity level to a text description
+  const intensityLabels = ["Beginner", "Light", "Moderate", "Challenging", "Expert"];
+  const intensityText = intensityLabels[params.intensity - 1];
+  
+  // Format muscle groups for better readability
+  const muscleGroupsText = params.muscleGroups
+    .map(group => group.charAt(0).toUpperCase() + group.slice(1))
+    .join(', ');
+  
+  // Format workout type
+  const workoutTypeMap: Record<string, string> = {
+    lifting: "Weight Lifting",
+    circuit: "Circuit Training",
+    crossfit: "CrossFit",
+    hiit: "HIIT",
+    calisthenics: "Calisthenics",
+    stretching: "Stretching/Flexibility",
+    combination: "Combination"
+  };
+  const workoutTypeText = workoutTypeMap[params.workoutType] || params.workoutType;
+  
+  // Format goal
+  const goalMap: Record<string, string> = {
+    weightLoss: "Weight Loss",
+    muscleBuild: "Muscle Building",
+    endurance: "Endurance",
+    strength: "Strength",
+    toning: "Toning/Definition",
+    flexibility: "Flexibility",
+    maintenance: "General Fitness/Maintenance"
+  };
+  const goalText = goalMap[params.goal] || params.goal;
+
+  return `
 Generate a detailed workout plan based on these parameters:
-- Muscle Groups: ${params.muscleGroups.join(', ')}
-- Intensity: ${params.intensity}/5
-- Workout Type: ${params.workoutType}
-- Goal: ${params.goal}
+- Muscle Groups: ${muscleGroupsText}
+- Intensity: ${intensityText} (${params.intensity}/5)
+- Workout Type: ${workoutTypeText}
+- Goal: ${goalText}
 - Duration: ${params.duration} minutes
 
-Please create a structured workout with warm-up, main exercises, and cool down sections. Include form tips and make it appropriately challenging for the specified intensity level.
-    `;
+Please create a structured workout with warm-up, main exercises, and cool down sections. Use HTML formatting for structure (with h3, h4, p, ul, li tags). Include form tips and make it appropriately challenging for the specified intensity level.
 
-    // Check if we're in a test environment and return mock data
-    if (process.env.NODE_ENV === "test") {
-      return mockWorkoutResponse(params);
-    }
-
-    // Try to use Ollama API
-    try {
-      const response = await fetch("http://localhost:11434/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: LLM_MODEL,
-          prompt: userPrompt,
-          system: SYSTEM_PROMPT,
-          stream: false,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Ollama API returned ${response.status}`);
-      }
-
-      const data = await response.json();
-      return formatWorkoutResponse(data.response);
-    } catch (error) {
-      console.error("Error using Ollama API:", error);
-      
-      // Fallback to a mock workout if Ollama API is not available
-      console.log("Falling back to mock workout generation");
-      return mockWorkoutResponse(params);
-    }
-  } catch (error) {
-    console.error("Error in generateWorkoutWithLLM:", error);
-    throw new Error("Failed to generate workout with LLM");
-  }
+Be sure to include the following sections with clear HTML formatting:
+1. <h3>Overview</h3> - A brief introduction to the workout
+2. <h4>Warm-up</h4> - 5-10 minutes of appropriate warm-up exercises
+3. <h4>Main Workout</h4> - The core exercises targeting the specified muscle groups
+4. <h4>Cool Down</h4> - Appropriate stretching and recovery
+5. <h4>Training Tips</h4> - Advice specific to the workout intensity and goals
+`;
 }
 
 function formatWorkoutResponse(text: string): string {
