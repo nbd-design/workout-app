@@ -117,8 +117,8 @@ export function WorkoutForm({ onWorkoutGenerated }: WorkoutFormProps) {
                       variant="outline"
                       className={`px-3 py-2 h-auto text-sm font-medium glass-input backdrop-blur-md border-opacity-30 transition-all
                       ${selectedMuscleGroups.includes(muscleGroup.value) 
-                        ? "bg-primary/30 text-primary-foreground border-primary hover:bg-primary/40 glow" 
-                        : "hover:bg-muted/30 text-foreground"
+                        ? "bg-primary/40 text-primary-foreground border-primary/80 hover:bg-primary/100 shadow-[0_0_15px_rgba(0,0,0,0.1)] ring-1 ring-primary/50" 
+                        : "hover:bg-muted/30 text-foreground hover:border-primary/30"
                       }`}
                       onClick={() => toggleMuscleGroup(muscleGroup.value)}
                     >
