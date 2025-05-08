@@ -2,6 +2,8 @@ import {
   workoutRequests, type WorkoutRequest, type InsertWorkoutRequest,
   workoutHistory, type WorkoutHistory, type InsertWorkoutHistory 
 } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   createWorkoutRequest(request: InsertWorkoutRequest): Promise<WorkoutRequest>;
@@ -9,63 +11,50 @@ export interface IStorage {
   getWorkoutHistory(): Promise<WorkoutHistory[]>;
 }
 
-export class MemStorage implements IStorage {
-  private requests: Map<number, WorkoutRequest>;
-  private workouts: Map<number, WorkoutHistory>;
-  private currentRequestId: number;
-  private currentWorkoutId: number;
-
-  constructor() {
-    this.requests = new Map();
-    this.workouts = new Map();
-    this.currentRequestId = 1;
-    this.currentWorkoutId = 1;
-  }
-
+export class DatabaseStorage implements IStorage {
   async createWorkoutRequest(request: InsertWorkoutRequest): Promise<WorkoutRequest> {
-    const id = this.currentRequestId++;
-    const timestamp = new Date();
+    const [workoutRequest] = await db
+      .insert(workoutRequests)
+      .values(request)
+      .returning();
     
-    const workoutRequest: WorkoutRequest = {
-      id,
-      ...request,
-      timestamp
-    };
-    
-    this.requests.set(id, workoutRequest);
     return workoutRequest;
   }
 
   async updateWorkoutContent(requestId: number, content: string): Promise<WorkoutHistory> {
-    const request = this.requests.get(requestId);
+    // First, get the request to retrieve all necessary data
+    const [request] = await db
+      .select()
+      .from(workoutRequests)
+      .where(eq(workoutRequests.id, requestId));
     
     if (!request) {
       throw new Error(`Workout request with ID ${requestId} not found`);
     }
     
-    const id = this.currentWorkoutId++;
-    const timestamp = new Date();
+    // Create the workout history record
+    const [workout] = await db
+      .insert(workoutHistory)
+      .values({
+        requestId,
+        content,
+        muscleGroups: request.muscleGroups,
+        intensity: request.intensity,
+        workoutType: request.workoutType,
+        goal: request.goal,
+        duration: request.duration
+      })
+      .returning();
     
-    const workout: WorkoutHistory = {
-      id,
-      requestId,
-      content,
-      timestamp,
-      muscleGroups: request.muscleGroups,
-      intensity: request.intensity,
-      workoutType: request.workoutType,
-      goal: request.goal,
-      duration: request.duration
-    };
-    
-    this.workouts.set(id, workout);
     return workout;
   }
 
   async getWorkoutHistory(): Promise<WorkoutHistory[]> {
-    return Array.from(this.workouts.values())
-      .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+    return await db
+      .select()
+      .from(workoutHistory)
+      .orderBy({ timestamp: 'desc' });
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
